@@ -69,19 +69,39 @@ In a new Terminal window, run the following command to read the events from the 
 bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092
 ```
 
-You should see the events you wrote earlier displayed in the terminal.
+Exercise:
+1. Try accessing from 2nd message
 
-## Cleanup
-After you are done with the Kafka cluster, you can stop the Kafka server to free up resources.
 ```bash
-bin/kafka-server-stop.sh
+bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092 --offset 1
 ```
 
-Remove the Kafka directory if you no longer need it.
+2. Try accessing from the 3rd message
+
 ```bash
-cd ..
-rm -rf kafka
+bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092 --offset 2
 ```
+
+3. Can we print in reverse order?
+
+```bash
+# Kafka does not support consuming messages in reverse order directly.
+# You would need to implement custom logic in your consumer application to achieve this.
+```
+
+4. try accessing message after a timestamp
+
+```bash
+bin/kafka-console-consumer.sh --topic quickstart-events --bootstrap-server localhost:9092 --offsets-for-times <timestamp_in_milliseconds>
+```
+
+5. What would happen if we try to access a message with an offset that does not exist?
+
+```bash
+bin/kafka-console-consumer.sh --topic quickstart-events --from-beginning --bootstrap-server localhost:9092 --offset 100
+```
+> You would likely see an error or no messages, depending on the Kafka configuration and the actual number of messages in the topic.
+
 
 # Exploring Kafka Topics
 
