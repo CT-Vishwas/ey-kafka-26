@@ -1,6 +1,14 @@
 # Kafka Multi broker setup using docker compose
 
 This setup demonstrates how to run a multi-broker Kafka cluster using Docker Compose. It includes multiple Kafka brokers.
+- Install Docker Compose
+
+```bash
+DOCKER_CONFIG=${DOCKER_CONFIG:-$HOME/.docker}
+mkdir -p $DOCKER_CONFIG/cli-plugins
+curl -SL https://github.com/docker/compose/releases/download/v5.6.0/docker-compose-linux-x86_64 -o $DOCKER_CONFIG/cli-plugins/docker-compose
+chmod +x $DOCKER_CONFIG/cli-plugins/docker-compose
+```
 
 - See the docker compose version
 
@@ -49,6 +57,13 @@ services:
       DYNAMIC_CONFIG_ENABLED: 'true'
       KAFKA_CLUSTERS_0_NAME: 'local-kraft-cluster'
       KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: 'kafka:9092'
+```
+
+**Note:** Ensure that Docker and Docker Compose are installed and running on your system before executing the commands.
+- docker containers from previous runs, are removed
+```bash
+docker container ls -a
+docker container rm kafka
 ```
 
 - From the directory containing the `docker-compose.yml` file, run the following command to start the Kafka cluster:
