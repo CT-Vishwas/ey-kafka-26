@@ -19,7 +19,7 @@ services:
     container_name: kafka
     ports:
       - "9092:9092"   # Native internal/external broker communications
-      - "9094:9094"   # Host machine access (if needed outside Docker)
+    # Host machine access (if needed outside Docker)
     environment:
       # Cluster Configuration (KRaft Mode)
       KAFKA_NODE_ID: 1
